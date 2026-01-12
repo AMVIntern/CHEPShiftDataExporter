@@ -2,13 +2,15 @@
 using System.IO;
 using System.Threading;
 using System.Text.Json;
+using System.Linq;
+using System.Collections.Generic;
 
 class Program
 {
     static void Main(string[] args)
     {
         // Load configuration from JSON file
-        string configPath = @"C:\AMV\Gocator\Config\config.json"; // Adjust path as needed
+        string configPath = @"C:\AMV\CHEPShiftDataExporter\config.json"; // Adjust path as needed
         EmailData emailData = LoadConfig(configPath);
         if (emailData == null)
         {
@@ -58,8 +60,8 @@ class Program
             }
             Console.WriteLine(); // New line after countdown
 
-            // Generate combined CSV and send email (shift and date from CSV)
-            viewModel.GenerateAndSendReport();
+            // Find latest CSV and send email
+            viewModel.SendLatestCsvEmail();
         }
     }
 
@@ -77,14 +79,6 @@ class Program
         }
         // If all times today have passed, return the first time tomorrow
         return now.Date.AddDays(1) + sortedTimes[0];
-    }
-
-    private static string GetCurrentShift(DateTime now)
-    {
-        int hour = now.Hour;
-        if (hour >= 6 && hour < 14) return "1"; // 6 AM to 2 PM
-        else if (hour >= 14 && hour < 22) return "2"; // 2 PM to 10 PM
-        else return "3"; // 10 PM to 6 AM
     }
 
     private static EmailData LoadConfig(string configPath)
@@ -108,8 +102,8 @@ class Program
                         FromEmail = "amvgocatorreport@gmail.com",
                         AppPassword = "zoyr xkfl zxlk dhqy",
                         ToEmails = new List<string> { "vikrant@amvco.com.au" },
-                        Subject = "AMV Gocator Report",
-                        Body = "Please find attached the Gocator Report for {0} corresponding to Shift {1}."
+                        Subject = "CSV Report",
+                        Body = "Please find attached the latest CSV report."
                     }
                 };
                 jsonString = JsonSerializer.Serialize(defaultConfig, new JsonSerializerOptions { WriteIndented = true });
