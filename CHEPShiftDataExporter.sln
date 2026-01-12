@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.14.36310.24
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmailTest", "EmailTest\EmailTest.csproj", "{A498393E-C175-4CC7-BF94-5453904C9A78}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CHEPShiftDataExporter", "CHEPShiftDataExporter\CHEPShiftDataExporter.csproj", "{A498393E-C175-4CC7-BF94-5453904C9A78}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
